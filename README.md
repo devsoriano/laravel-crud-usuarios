@@ -1,66 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Rafael Soriano Ramírez
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Challenge Laravel, CRUD de usuarios y roles de usuarios.
 
-## About Laravel
+El proyecto es un CRUD de laravel con MYSQL para gestión de usuarios con distintos roles, esta aplicación corre sobre Docker, una vez descargado el proyecto asegurese de tener encendido docker y trabajar e ingresar los comandos sobre la raíz del proyecto. 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Paso 1
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+En la consola de tu preferencia, donde tengas instalado docker, ingresa el comando:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
+docker-compose build       
+```
 
-## Learning Laravel
+Esto hará que se construya el contenedor con los elementos necesarios para cubrir MySQL y Laravel, tu consola debe parecerse a esto en respuesta:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/05cd4665-e19f-42cc-bb61-4114e137149c)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Paso 2
 
-## Laravel Sponsors
+Ahora debes de inicializar la imagen generada por docker con el comando:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+docker-compose up -d       
+```
+En consola se mostrará:
 
-### Premium Partners
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/8f3cd377-1cb4-468b-926e-7fa9158d553d)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Así mismo en la UI de docker:
 
-## Contributing
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/03bb9a32-f22d-464c-9cff-a7f25f9a79bd)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+### Paso 3
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Migrar la base de datos con el comando:
 
-## Security Vulnerabilities
+```
+docker-compose exec web php artisan migrate     
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+y mostrando en consola: 
 
-## License
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/a19c8f53-3964-4c71-a79b-f2c0e77c5c48)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Las migraciones que nos interesa que se hayan migrado correctamente son:
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/524de713-2250-4c3f-b1ff-820fb1e06e7f)
+
+Ya que son las pertenecientes al proyecto, las demás son pertenecientes al mock de prueba de laravel.
+
+
+Ahora prblaremos la data para roles con el comando:
+
+```
+docker-compose exec web php artisan db:seed --class=RolesTableSeeder --verbose
+```
+
+Nos aseguramos que se haya poblado correctamente la data:
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/76f708ea-0207-4675-93ff-e33be3a60203)
+
+
+### Paso 5
+
+Inicializamos el proyecto con el comando en consola:
+
+```
+docker-compose exec web php artisan serve --host=0.0.0.0 --port=80
+```
+
+De esta manera estamos listos para ver el proyecto de nuestra aplicación en el path:
+
+```
+http://localhost:8000/usuarios
+```
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/70de5353-b848-4b54-b73a-ee4d8a575dcf)
+
+### Paso 6
+
+Probamos la aplicación creando un usuario:
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/ec0cd404-4ef8-4350-853d-7c06f133fc4c)
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/c5916009-f0d4-4770-b964-7431d3449845)
+
+Podemos también editarlo:
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/472fc6cb-6493-4b55-945d-7f35e2d62583)
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/4304435d-e837-426f-a286-bbee9af2db2a)
+
+Y eliminar:
+
+![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/804a15ff-462d-4759-9ad3-bd79e370f0ef)
+
+
+## Notas
+Los formularios cuentan con validaciones y el código es escalable a más funcionalidades.
+
+
+
+
+
+
+
+
+
+
