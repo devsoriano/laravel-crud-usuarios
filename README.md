@@ -97,7 +97,7 @@ Y eliminar:
 ![image](https://github.com/devsoriano/laravel-crud-usuarios/assets/22625671/804a15ff-462d-4759-9ad3-bd79e370f0ef)
 
 
-## Conslusiones y notas
+## Notas
 Los formularios cuentan con validaciones y el código es escalable a más funcionalidades.
 
 
